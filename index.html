@@ -19,6 +19,10 @@
     <div class="kicker">안양 비산동 · 샘모루초등학교</div>
     <h1>샘모루 별빛 라이더</h1>
     <p class="lead">우리 학교와 동네 골목을 자전거로 달려요.<br>길에 떨어진 <b>별빛 조각 ✦</b>을 모아 운동장의 <b>샘</b>에 담아 주세요.</p>
+    <div class="mpjoin">
+      <div class="mpt">👥 함께 타기 <small>같은 반 코드를 넣은 친구끼리 동네에서 만나요 (비워 두면 혼자 타기)</small></div>
+      <div class="mpf"><input id="mpCode" maxlength="8" placeholder="반 코드 (예: SAEM61)" autocomplete="off"><input id="mpNum" type="number" min="1" max="99" placeholder="번호"><input id="mpName" maxlength="8" placeholder="이름"></div>
+    </div>
     <div class="choose">
       <button class="big" data-mode="day">☀ 맑은 낮</button>
       <button class="big dusk" data-mode="dusk">🌇 노을</button>
@@ -27,7 +31,7 @@
     <div class="keys">
       <span><kbd>W</kbd> 페달</span><span><kbd>S</kbd> 브레이크</span><span><kbd>A</kbd><kbd>D</kbd> 방향</span>
       <span><kbd>Space</kbd> 점프 (세 번 = 하늘 날기)</span><span><kbd>E</kbd> 묘기</span><span><kbd>F</kbd> 내려서 걷기</span>
-      <span><kbd>V</kbd> 시점</span><span><kbd>P</kbd> 그림 효과</span><span><kbd>M</kbd> 큰 지도</span><span><kbd>N</kbd> 하늘 바꾸기</span><span><kbd>R</kbd> 학교로</span>
+      <span><kbd>V</kbd> 시점</span><span><kbd>P</kbd> 그림 효과</span><span><kbd>M</kbd> 큰 지도</span><span><kbd>N</kbd> 하늘 바꾸기</span><span><kbd>R</kbd> 학교로</span><span><kbd>1</kbd>~<kbd>6</kbd> 이모티콘</span><span><kbd>Q</kbd> 벨</span>
     </div>
     <div class="best" id="bestLine"></div>
   </div>
@@ -45,6 +49,8 @@
   <div class="stat"><span class="ic">🚲</span><b id="speed">0</b><small>km/h</small></div>
 </div>
 <div class="hud" id="stamps"></div>
+<div class="hud hidden" id="mpChip"><span class="mpi">👥</span><span id="mpTxt">친구 찾는 중…</span></div>
+<div class="hud hidden" id="mpList"></div>
 <div class="hud" id="toast"></div>
 <div class="hud" id="guide"><span id="guideArrow">▲</span><span id="guideText"></span></div>
 <canvas class="hud" id="mini" width="200" height="200"></canvas>

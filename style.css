@@ -94,3 +94,17 @@ body.night #hudTL .title{color:#ffe7a8}body.night .stat small{color:#c9c2ad}body
 #qMsg{margin:14px 0 4px;font-size:16px;line-height:1.6;min-height:4px}
 #qMsg.good{color:#2b8a3e;font-weight:700}#qMsg.bad{color:#c92a2a;font-weight:700}
 #qClose{margin-top:12px;width:100%}
+
+/* ---- 함께 타기 ---- */
+.mpjoin{background:rgba(255,255,255,.6);border:1px dashed rgba(112,72,232,.45);border-radius:14px;padding:10px 12px;margin:0 0 14px}
+.mpt{font-weight:900;color:#5f3dc4;font-size:15px;margin-bottom:6px}.mpt small{font-weight:500;color:var(--sub);font-size:12px;margin-left:4px}
+.mpf{display:flex;gap:8px}.mpf input{flex:1;min-width:0;font:700 15px var(--body);padding:8px 10px;border:1.5px solid #d8cfee;border-radius:10px;background:#fff;color:var(--ink)}
+.mpf input#mpNum{flex:.45}.mpf input:focus{outline:2px solid #9775fa;border-color:transparent}
+#mpChip{top:84px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:6px;background:var(--paper);border:1px solid rgba(112,72,232,.4);border-radius:30px;padding:6px 14px;font-weight:800;font-size:14px;color:#5f3dc4;box-shadow:var(--shadow);cursor:pointer;margin-top:44px}
+#mpChip.hidden{display:none}#mpChip.live{background:#f3f0ff}
+#mpList{top:176px;left:50%;transform:translateX(-50%);width:min(340px,90vw);max-height:50vh;overflow:auto;background:var(--paper);border:1px solid rgba(112,72,232,.4);border-radius:16px;box-shadow:var(--shadow);padding:10px 12px;font-size:14px}
+#mpList.hidden{display:none}
+.mph{font-weight:800;color:#5f3dc4;margin-bottom:6px}.mpe{color:var(--sub);padding:6px 0}
+.mpr{display:flex;align-items:center;gap:8px;padding:5px 0;border-top:1px solid rgba(0,0,0,.06);font-weight:700}.mpr small{flex:1;color:var(--sub);font-weight:500;text-align:right}
+.mpr .dot{width:12px;height:12px;border-radius:50%;flex:none}.mpr button{border:0;border-radius:8px;background:#7048e8;color:#fff;padding:4px 10px;font-size:13px}
+.mpemo{display:flex;gap:6px;margin-top:8px}.mpemo button{flex:1;border:0;border-radius:10px;background:#fff;font-size:20px;padding:4px 0}.mpk{font-size:11px;color:var(--sub);margin-top:4px;text-align:center}
