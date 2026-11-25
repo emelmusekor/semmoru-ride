@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>샘모루 별빛 라이더</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body class="pre">
@@ -20,13 +20,14 @@
     <h1>샘모루 별빛 라이더</h1>
     <p class="lead">우리 학교와 동네 골목을 자전거로 달려요.<br>길에 떨어진 <b>별빛 조각 ✦</b>을 모아 운동장의 <b>샘</b>에 담아 주세요.</p>
     <div class="choose">
-      <button class="big" data-mode="day">☀ 낮에 타기</button>
-      <button class="big night" data-mode="night">☾ 밤에 타기</button>
+      <button class="big" data-mode="day">☀ 맑은 낮</button>
+      <button class="big dusk" data-mode="dusk">🌇 노을</button>
+      <button class="big night" data-mode="night">☾ 별밤</button>
     </div>
     <div class="keys">
       <span><kbd>W</kbd> 페달</span><span><kbd>S</kbd> 브레이크</span><span><kbd>A</kbd><kbd>D</kbd> 방향</span>
       <span><kbd>Space</kbd> 점프 (세 번 = 하늘 날기)</span><span><kbd>E</kbd> 묘기</span><span><kbd>F</kbd> 내려서 걷기</span>
-      <span><kbd>V</kbd> 시점</span><span><kbd>M</kbd> 큰 지도</span><span><kbd>N</kbd> 낮·밤</span><span><kbd>R</kbd> 학교로</span>
+      <span><kbd>V</kbd> 시점</span><span><kbd>P</kbd> 그림 효과</span><span><kbd>M</kbd> 큰 지도</span><span><kbd>N</kbd> 하늘 바꾸기</span><span><kbd>R</kbd> 학교로</span>
     </div>
     <div class="best" id="bestLine"></div>
   </div>
@@ -40,6 +41,7 @@
 <div class="hud" id="hudTR">
   <div class="stat"><span class="ic">✦</span><b id="carry">0</b><small>들고 있는 별빛</small></div>
   <div class="stat"><span class="ic gold">★</span><b id="deliv">0</b><small>샘에 담은 별빛</small></div>
+  <div class="stat"><span class="ic q">?</span><b id="quizN">0</b><small>맞힌 퀴즈</small></div>
   <div class="stat"><span class="ic">🚲</span><b id="speed">0</b><small>km/h</small></div>
 </div>
 <div class="hud" id="stamps"></div>
@@ -50,6 +52,7 @@
   <button id="bMode" title="낮·밤 (N)">☾</button>
   <button id="bMusic" title="음악">♪</button>
   <button id="bView" title="시점 (V)">👁</button>
+  <button id="bPaint" title="그림 효과 (P)" class="on">🖌</button>
   <button id="bMap" title="큰 지도 (M)">🗺</button>
   <button id="bFull" title="전체 화면">⛶</button>
   <button id="bHelp" title="도움말">?</button>
@@ -70,9 +73,20 @@
     <li><b>E</b> 공중에서 묘기, <b>F</b> 자전거에서 내려 걷기</li>
     <li><b>M</b> 큰 지도(누르면 이동), <b>R</b> 학교로 돌아가기</li>
     <li>별빛 ✦ 을 모아 운동장의 <b>샘</b>으로 가져가요. 처음 가 본 장소에는 도장이 찍혀요.</li>
+    <li>물음표 <b>?</b> 표지판에 가면 우리 학교·안양 퀴즈가 나와요. 맞히면 별빛 3개!</li>
+    <li>육교는 자전거에서 내려(F) 걸어서 건너요.</li>
     <li>큰길에는 차가 다녀요. 횡단보도로 건너고, 차 앞으로 갑자기 나가지 않기!</li>
   </ul>
   <button class="big" id="helpClose">계속 타기</button>
+</div></div>
+
+<!-- 퀴즈 -->
+<div id="quiz" class="screen hidden"><div class="panel quizp">
+  <div class="kicker" id="qWhere">우리 동네 퀴즈</div>
+  <h2 id="qText"></h2>
+  <div id="qOpts"></div>
+  <div id="qMsg"></div>
+  <button class="big hidden" id="qClose">계속 타기</button>
 </div></div>
 
 <!-- 끝 화면 -->
@@ -88,6 +102,8 @@
 <div class="hud touch" id="tbtns"><button data-k="jump">점프</button><button data-k="trick">묘기</button><button data-k="brake">멈춤</button></div>
 
 <script src="mapdata.js"></script>
+<script src="shops.js"></script>
+<script src="quiz.js"></script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
 <script type="module" src="game.js"></script>
 </body>
