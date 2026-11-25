@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>샘모루 별빛 라이더</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="pre">
+<div id="view"></div>
+
+<div id="loading"><div class="ld-star">✦</div><div id="ldText">동네를 그리는 중…</div></div>
+
+<!-- 시작 화면 -->
+<div id="start" class="screen">
+  <div class="panel">
+    <div class="kicker">안양 비산동 · 샘모루초등학교</div>
+    <h1>샘모루 별빛 라이더</h1>
+    <p class="lead">우리 학교와 동네 골목을 자전거로 달려요.<br>길에 떨어진 <b>별빛 조각 ✦</b>을 모아 운동장의 <b>샘</b>에 담아 주세요.</p>
+    <div class="choose">
+      <button class="big" data-mode="day">☀ 낮에 타기</button>
+      <button class="big night" data-mode="night">☾ 밤에 타기</button>
+    </div>
+    <div class="keys">
+      <span><kbd>W</kbd> 페달</span><span><kbd>S</kbd> 브레이크</span><span><kbd>A</kbd><kbd>D</kbd> 방향</span>
+      <span><kbd>Space</kbd> 점프 (세 번 = 하늘 날기)</span><span><kbd>E</kbd> 묘기</span><span><kbd>F</kbd> 내려서 걷기</span>
+      <span><kbd>V</kbd> 시점</span><span><kbd>M</kbd> 큰 지도</span><span><kbd>N</kbd> 낮·밤</span><span><kbd>R</kbd> 학교로</span>
+    </div>
+    <div class="best" id="bestLine"></div>
+  </div>
+</div>
+
+<!-- 화면 위 정보 -->
+<div class="hud" id="hudTL">
+  <div class="title">샘모루 별빛 라이더</div>
+  <div class="place" id="place">샘모루초등학교</div>
+</div>
+<div class="hud" id="hudTR">
+  <div class="stat"><span class="ic">✦</span><b id="carry">0</b><small>들고 있는 별빛</small></div>
+  <div class="stat"><span class="ic gold">★</span><b id="deliv">0</b><small>샘에 담은 별빛</small></div>
+  <div class="stat"><span class="ic">🚲</span><b id="speed">0</b><small>km/h</small></div>
+</div>
+<div class="hud" id="stamps"></div>
+<div class="hud" id="toast"></div>
+<div class="hud" id="guide"><span id="guideArrow">▲</span><span id="guideText"></span></div>
+<canvas class="hud" id="mini" width="200" height="200"></canvas>
+<div class="hud" id="tools">
+  <button id="bMode" title="낮·밤 (N)">☾</button>
+  <button id="bMusic" title="음악">♪</button>
+  <button id="bView" title="시점 (V)">👁</button>
+  <button id="bMap" title="큰 지도 (M)">🗺</button>
+  <button id="bFull" title="전체 화면">⛶</button>
+  <button id="bHelp" title="도움말">?</button>
+  <button id="bEnd" title="그만 타기" class="end">그만</button>
+</div>
+<div class="hud" id="credit">지도 © OpenStreetMap 기여자</div>
+
+<!-- 큰 지도 -->
+<div id="bigmap" class="screen hidden"><div class="panel map"><canvas id="bigc" width="900" height="900"></canvas><div class="mapnote">지도를 누르면 그곳으로 순간이동해요 · M 닫기</div></div></div>
+
+<!-- 도움말 -->
+<div id="help" class="screen hidden"><div class="panel">
+  <h2>타는 법</h2>
+  <ul class="helpl">
+    <li><b>W / ↑</b> 페달 밟기, <b>S / ↓</b> 브레이크·뒤로</li>
+    <li><b>A D / ← →</b> 핸들 돌리기, 마우스로 끌면 둘러보기</li>
+    <li><b>Space</b> 점프, 빠르게 세 번 누르면 잠깐 하늘을 날아요</li>
+    <li><b>E</b> 공중에서 묘기, <b>F</b> 자전거에서 내려 걷기</li>
+    <li><b>M</b> 큰 지도(누르면 이동), <b>R</b> 학교로 돌아가기</li>
+    <li>별빛 ✦ 을 모아 운동장의 <b>샘</b>으로 가져가요. 처음 가 본 장소에는 도장이 찍혀요.</li>
+    <li>큰길에는 차가 다녀요. 횡단보도로 건너고, 차 앞으로 갑자기 나가지 않기!</li>
+  </ul>
+  <button class="big" id="helpClose">계속 타기</button>
+</div></div>
+
+<!-- 끝 화면 -->
+<div id="endScr" class="screen hidden"><div class="panel">
+  <h2>오늘의 라이딩</h2>
+  <div class="endbig"><b id="endN">0</b> 개의 별빛을 샘에 담았어요</div>
+  <div id="endInfo"></div>
+  <div class="choose"><button class="big" id="endGo">계속 타기</button><button class="big night" id="endNew">처음부터</button></div>
+</div></div>
+
+<!-- 휴대폰 -->
+<div class="hud touch" id="joy"><div id="joyK"></div></div>
+<div class="hud touch" id="tbtns"><button data-k="jump">점프</button><button data-k="trick">묘기</button><button data-k="brake">멈춤</button></div>
+
+<script src="mapdata.js"></script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
+<script type="module" src="game.js"></script>
+</body>
+</html>
